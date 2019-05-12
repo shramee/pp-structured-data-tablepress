@@ -32,7 +32,7 @@ class PootlePress_Structured_Data {
 
 	function __construct() {
 		add_filter( 'tablepress_table_output',  array( $this, 'courses_structured_data' ), 10, 2 );
-		add_action( 'wp_footer',  array( $this, 'json_out' ), 10, 2 );
+		add_action( 'the_content',  array( $this, 'json_out' ), 25, 2 );
 	}
 
 	function structured_data_for_course( $date, $stock, $city, $country = 'UK' ) {
@@ -101,10 +101,11 @@ class PootlePress_Structured_Data {
 		return $output;
 	}
 	
-	function json_out() {
+	function json_out( $content ) {
 		if ( $this->json_ld ) {
-			echo "<script type='application/ld+json'>{$this->json_ld}</script>";
+			$content .= "<script type='application/ld+json'>{$this->json_ld}</script>";
 		}
+		return $content;
 	}
 }
 
