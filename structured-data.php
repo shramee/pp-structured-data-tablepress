@@ -8,12 +8,6 @@
  * Author URI: http://shramee.me/
  * @developer shramee <shramee.srivastav@gmail.com>
  */
-/**
- * Created by PhpStorm.
- * User: shramee
- * Date: 27/12/16
- * Time: 10:07 AM
- */
 class PootlePress_Structured_Data {
 	/** @var PootlePress_Structured_Data Instance */
 	private static $_instance;
@@ -32,7 +26,6 @@ class PootlePress_Structured_Data {
 
 	function __construct() {
 		add_filter( 'tablepress_table_output',  array( $this, 'courses_structured_data' ), 10, 2 );
-		add_action( 'the_content',  array( $this, 'json_out' ), 25, 2 );
 	}
 
 	function structured_data_for_course( $date, $stock, $city, $country = 'UK' ) {
@@ -56,7 +49,7 @@ class PootlePress_Structured_Data {
 			'offers'      =>
 				array(
 					'@type'              => 'Offer',
-					'price'              => '95.00',
+					'price'              => '125.00',
 					'priceCurrency'      => 'GBP',
 					'url'                => 'http://www.pootlepress.com/wordpress-training#panel-2-7-0-0',
 					'availability'       => $stock ?
@@ -69,6 +62,8 @@ class PootlePress_Structured_Data {
 	}
 
 	function courses_structured_data( $output, $table ) {
+		$json_ld = '';
+
 		if ( 1 == $table['id'] && ! $this->_json_ld_output_done ) {
 			$now = time();
 			$courses = array();
@@ -94,18 +89,10 @@ class PootlePress_Structured_Data {
 
 			if ( $courses ) {
 				$json_ld = json_encode( $courses );
-				$this->json_ld = $json_ld;
 			}
 		}
 
-		return $output;
-	}
-	
-	function json_out( $content ) {
-		if ( $this->json_ld ) {
-			$content .= "<script type='application/ld+json'>{$this->json_ld}</script>";
-		}
-		return $content;
+		return $output . "<script type='application/ld+json'>{$json_ld}</script>";
 	}
 }
 
