@@ -32,8 +32,8 @@ class PootlePress_Structured_Data {
 		return array(
 			'@context'    => 'http://schema.org',
 			'@type'       => 'EducationEvent',
-			'name'        => 'WordPress in 1 day',
-			'description' => 'Learn WordPress in 1 day course at PootlePress will give you the knowledge to create, manage and run a great WordPress website.',
+			'name'        => 'WordPress course',
+			'description' => 'Our 1 day WordPress course will give you the knowledge to create, manage and run a great WordPress website.',
 			'organizer'   => 'PootlePress',
 			'performer'   => 'Jamie Marsland',
 			'url'         => 'http://www.pootlepress.com/wordpress-training',
