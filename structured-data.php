@@ -55,7 +55,8 @@ class PootlePress_Structured_Data {
 					'availability'       => $stock ?
 						'http://schema.org/InStock' :
 						'http://schema.org/SoldOut',
-					'availabilityStarts' => '2017-01-01',
+					'availabilityStarts' => '2020-01-01',
+					'validFrom'          => '2020-01-01',
 					'inventoryLevel'     => $stock,
 				),
 		);
